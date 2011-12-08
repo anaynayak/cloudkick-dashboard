@@ -5,10 +5,13 @@ GEM
       crack
       oauth
     crack (0.3.1)
+    haml (3.1.4)
     oauth (0.4.5)
     rack (1.3.5)
     rack-protection (1.1.4)
       rack
+    shotgun (0.9)
+      rack (>= 1.0)
     sinatra (1.3.1)
       rack (~> 1.3, >= 1.3.4)
       rack-protection (~> 1.1, >= 1.1.2)
@@ -20,5 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   cloudkick
+  haml
   rack
+  shotgun
   sinatra

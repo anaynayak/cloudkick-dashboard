@@ -1,0 +1,29 @@
+%html
+  %head
+    %title Alerts
+    /%meta{'http-equiv' => 'refresh', :content => '15'}/
+    %link{'href' => 'http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css', 'rel' => 'stylesheet'} 
+    :css
+      body {
+        background-color: black;
+      }
+      .container {
+        padding-top: 20px;
+      }
+      .title {
+        color: white;
+      }
+  %body
+    .container
+      %h2.title Cloudkick status
+      - status.each do |node, errors| 
+        %div.alert-message.block-message.warning
+          %div.description
+            %h3.instance #{node[:instance_id].join " "}  | #{node[:ip]} 
+            %h3.tags  #{node[:tags].join " "}
+          %div.errors.error.alert-message
+            - errors.each do |error|
+              %div.error #{error}
+      - if status.empty?
+        %div.success.alert-message
+          h3. All good! Hopefully things are still working :)
