@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    cloudkick (0.2.16)
+      crack
+      oauth
+    crack (0.3.1)
+    oauth (0.4.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  cloudkick
