@@ -4,7 +4,6 @@ require 'json'
 require 'sinatra'
 
 config = YAML.load_file('config.yml')
-# make the consumer out of your secret and key
 consumer = OAuth::Consumer.new(config['consumer_key'], config['consumer_secret'],
                                :site => "https://api.cloudkick.com",
                                :http_method => :get)
@@ -16,6 +15,7 @@ def map i
           :instance_id => i[:details][:instanceId]
         }]
 end
+
 get "/" do
   access_token = OAuth::AccessToken.new(consumer)
   req = access_token.get("/2.0/nodes")
@@ -33,7 +33,7 @@ get "/" do
   end
 
   status = checks.collect do |id, status| 
-    [node_vals[id.to_s], status[:check_statuses].select{|key, s| s[:status] != 'Ok'}.collect {|key, s| s[:details]} ]
+    [node_vals[id.to_s], status[:check_statuses].select{|key, s| s[:status] != 'Ok'}.collect {|key, s| s[:details]}.uniq ]
   end
 
   haml :index, :locals => {:status => status}, :format => :html5
