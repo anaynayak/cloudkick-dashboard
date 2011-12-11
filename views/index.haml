@@ -1,7 +1,7 @@
 %html
   %head
     %title Alerts
-    /%meta{'http-equiv' => 'refresh', :content => '15'}/
+    %meta{'http-equiv' => 'refresh', :content => '15'}/
     %link{'href' => 'http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css', 'rel' => 'stylesheet'} 
     :css
       body {
@@ -13,14 +13,19 @@
       .title {
         color: white;
       }
+      .label {
+        display: inline;
+      }
   %body
     .container
       %h2.title Cloudkick status
       - status.each do |node, errors| 
-        %div.alert-message.block-message.warning
+        %div{:class => "alert-message block-message #{node[:overall_status]}"}
           %div.description
-            %h3.instance #{node[:instance_id].join " "}  | #{node[:ip]} 
-            %h3.tags  #{node[:tags].join " "}
+            %h3.instance 
+              #{node[:instance_id].join " "}  | #{node[:ip]} 
+              - node[:tags].each do |tag| 
+                %span.label.success #{tag}
           %div.errors.error.alert-message
             - errors.each do |error|
               %div.error #{error}

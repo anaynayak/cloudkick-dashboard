@@ -33,7 +33,7 @@ get "/" do
   end
 
   status = checks.collect do |id, status| 
-    [node_vals[id.to_s], status[:check_statuses].select{|key, s| s[:status] != 'Ok'}.collect {|key, s| s[:details]}.uniq ]
+    [node_vals[id.to_s].merge(:overall_status => status[:overall_check_statuses].downcase), status[:check_statuses].select{|key, s| s[:status] != 'Ok'}.collect {|key, s| s[:details]}.uniq ]
   end
 
   haml :index, :locals => {:status => status}, :format => :html5
