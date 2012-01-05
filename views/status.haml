@@ -1,0 +1,34 @@
+%html
+  %head
+    %title Alerts
+    %meta{'http-equiv' => 'refresh', :content => '15'}/
+    %link{'href' => 'bootstrap.min.css', 'rel' => 'stylesheet'} 
+    :css
+      body {
+        background-color: black;
+      }
+      .container , h3, span.label{
+        padding-top: 20px;
+        font-size: 24px;
+      }
+      .title {
+        color: white;
+      }
+      .label {
+        display: inline;
+      }
+  %body
+    .container
+      %h2.title Cloudkick status
+      - status.each do |node, errors| 
+        %div{:class => "alert-message block-message #{node[:overall_status]}"}
+          %div.description
+            %h3.instance 
+              #{node[:instance_id].join " "}  | #{node[:ip]} 
+              - node[:tags].each do |tag| 
+                %span.label.success #{tag}
+          %div.errors.error.alert-message
+            - errors.each do |error|
+              %div.error #{error}
+      - if status.empty?
+        %div.success.alert-message  All good! Hopefully things are still working :)

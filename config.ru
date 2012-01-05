@@ -1,4 +1,2 @@
 require './cloudkick'
-
-run Sinatra::Application
-
+run Cloudkick 

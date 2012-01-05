@@ -1,34 +1,30 @@
 %html
   %head
-    %title Alerts
-    %meta{'http-equiv' => 'refresh', :content => '15'}/
-    %link{'href' => 'http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css', 'rel' => 'stylesheet'} 
+    %title Cloudkick Alerts
+    %link{'href' => 'bootstrap.min.css', 'rel' => 'stylesheet'} 
     :css
       body {
         background-color: black;
       }
-      .container , h3, span.label{
-        padding-top: 20px;
-        font-size: 24px;
+      .container-fluid {
+        padding-top: 40px 
       }
       .title {
         color: white;
       }
-      .label {
-        display: inline;
-      }
   %body
-    .container
-      %h2.title Cloudkick status
-      - status.each do |node, errors| 
-        %div{:class => "alert-message block-message #{node[:overall_status]}"}
-          %div.description
-            %h3.instance 
-              #{node[:instance_id].join " "}  | #{node[:ip]} 
-              - node[:tags].each do |tag| 
-                %span.label.success #{tag}
-          %div.errors.error.alert-message
-            - errors.each do |error|
-              %div.error #{error}
-      - if status.empty?
-        %div.success.alert-message  All good! Hopefully things are still working :)
+    .container-fluid
+      .sidebar
+        About cloudkick alerts 
+      .content
+        %form{:action => '/register', :method => 'post'}
+          .clearfix
+            %label.large{:for => 'key'} Consumer key
+            .input
+              %input{:type => 'text', :name=> 'key'}
+          .clearfix
+            %label.large{:for => 'key'} Consumer secret 
+            .input
+              %input{:type => 'text', :name=> 'secret'}
+          .clearfix
+            %input.btn.large.primary{:type => 'submit', :name=> 'Register', :value => 'Register'} 
